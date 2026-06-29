@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Himanshu Bisht — Full-Stack & AI Developer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #0c0c15;
+      --surface:    #13131f;
+      --surface2:   #1b1b2e;
+      --border:     #252540;
+      --text:       #e4e8f5;
+      --muted:      #7a849a;
+      --accent:     #7c3aed;
+      --accent-lt:  rgba(124, 58, 237, 0.12);
+      --accent-glow:rgba(124, 58, 237, 0.22);
+      --green:      #10b981;
+      --cyan:       #06b6d4;
+      --radius:     10px;
+      --mono:       'JetBrains Mono', monospace;
+      --display:    'Space Grotesk', sans-serif;
+      --body:       'Inter', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--body);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1rem 2.5rem;
+      background: rgba(12, 12, 21, 0.90);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 0.92rem; font-weight: 600;
+      color: var(--accent); text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-links { display: flex; gap: 1.75rem; list-style: none; }
+    .nav-links a {
+      font-size: 0.83rem; color: var(--muted);
+      text-decoration: none; transition: color 0.2s;
+    }
+    .nav-links a:hover, .nav-links a.active { color: var(--text); }
+
+    /* ─── SECTIONS ─── */
+    .section-wrap { padding: 6rem 2.5rem; max-width: 980px; margin: 0 auto; }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding-top: 5rem; max-width: 980px; margin: 0 auto; padding-left: 2.5rem; padding-right: 2.5rem;
+    }
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.78rem; color: var(--accent);
+      letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 1.4rem;
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .hero-eyebrow::before {
+      content: ''; display: inline-block;
+      width: 30px; height: 1.5px; background: var(--accent);
+    }
+    .hero-name {
+      font-family: var(--display);
+      font-size: clamp(2.8rem, 7vw, 4.6rem);
+      font-weight: 700; line-height: 1.07;
+      letter-spacing: -0.03em;
+      margin-bottom: 0.8rem;
+    }
+    .hero-name .cursor {
+      display: inline-block; width: 3px; height: 0.82em;
+      background: var(--accent); margin-left: 6px;
+      vertical-align: middle;
+      animation: blink 1s step-end infinite;
+    }
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .hero-role {
+      font-family: var(--mono);
+      font-size: 1rem; color: var(--cyan);
+      margin-bottom: 1.75rem;
+      letter-spacing: 0.02em;
+    }
+    .hero-sub {
+      font-size: 1.08rem; color: var(--muted);
+      max-width: 580px; line-height: 1.78;
+      margin-bottom: 2.5rem;
+    }
+    .hero-sub strong { color: var(--text); font-weight: 500; }
+
+    .btn-row { display: flex; gap: 0.85rem; flex-wrap: wrap; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.68rem 1.45rem; border-radius: 8px;
+      font-size: 0.875rem; font-weight: 500;
+      text-decoration: none; border: none; cursor: pointer;
+      transition: all 0.2s; font-family: var(--body);
+    }
+    .btn-primary { background: var(--accent); color: #fff; }
+    .btn-primary:hover { background: #6d28d9; box-shadow: 0 0 22px var(--accent-glow); }
+    .btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+    .btn-ghost:hover { border-color: var(--muted); }
+
+    /* ─── SECTION LABELS ─── */
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.72rem; color: var(--accent);
+      letter-spacing: 0.12em; text-transform: uppercase;
+      margin-bottom: 0.55rem;
+    }
+    h2 {
+      font-family: var(--display);
+      font-size: 1.85rem; font-weight: 700;
+      letter-spacing: -0.03em; margin-bottom: 0.6rem;
+    }
+    .divider {
+      width: 2.5rem; height: 2px;
+      background: var(--accent); border-radius: 2px;
+      margin-bottom: 2.75rem;
+    }
+
+    /* ─── ABOUT ─── */
+    .about-grid {
+      display: grid; grid-template-columns: 1.35fr 1fr; gap: 4rem; align-items: start;
+    }
+    .about-text p { color: var(--muted); margin-bottom: 1rem; line-height: 1.82; }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-text strong { color: var(--text); font-weight: 500; }
+
+    .info-list { list-style: none; }
+    .info-list li {
+      display: flex; gap: 0.75rem;
+      padding: 0.62rem 0; border-bottom: 1px solid var(--border);
+      font-size: 0.875rem;
+    }
+    .info-list li:last-child { border-bottom: none; }
+    .info-key { color: var(--muted); min-width: 78px; flex-shrink: 0; }
+    .info-val { color: var(--text); font-weight: 500; }
+    .info-val a { color: var(--cyan); text-decoration: none; }
+    .info-val a:hover { text-decoration: underline; }
+    .info-val.open { color: var(--green); }
+
+    /* ─── SKILLS ─── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1rem;
+    }
+    .skill-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      transition: border-color 0.2s;
+    }
+    .skill-card:hover { border-color: rgba(124, 58, 237, 0.45); }
+    .skill-card-head {
+      display: flex; align-items: center; gap: 0.65rem;
+      margin-bottom: 1rem;
+    }
+    .skill-icon {
+      width: 30px; height: 30px;
+      background: var(--accent-lt); border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.95rem; flex-shrink: 0;
+    }
+    .skill-card h3 { font-size: 0.9rem; font-weight: 600; font-family: var(--display); }
+    .tags { display: flex; flex-wrap: wrap; gap: 0.42rem; }
+    .tag {
+      background: var(--surface2); color: var(--muted);
+      font-family: var(--mono); font-size: 0.71rem;
+      padding: 0.22rem 0.6rem; border-radius: 5px;
+      border: 1px solid var(--border); transition: all 0.15s;
+    }
+    .tag:hover { color: var(--text); border-color: #3a3a5c; }
+    .tag.strong { color: var(--text); border-color: #30304e; background: #1f1f34; }
+
+    /* ─── PROJECTS ─── */
+    .projects-featured {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1rem; margin-bottom: 1rem;
+    }
+    .projects-rest {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+    }
+    .sub-label {
+      font-family: var(--mono); font-size: 0.7rem;
+      color: var(--muted); letter-spacing: 0.08em; text-transform: uppercase;
+      margin-bottom: 1rem; margin-top: 0.25rem;
+      display: flex; align-items: center; gap: 0.65rem;
+    }
+    .sub-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+    .sub-label.accent { color: var(--accent); }
+
+    .project-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+      display: flex; flex-direction: column;
+      transition: all 0.22s;
+    }
+    .project-card:not(.featured):hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
+      border-color: #303050;
+    }
+    .project-card.featured {
+      border-color: rgba(124, 58, 237, 0.35);
+      background: linear-gradient(155deg, #13131f, #18152a);
+    }
+    .project-card.featured:hover {
+      border-color: var(--accent);
+      box-shadow: 0 0 36px rgba(124, 58, 237, 0.18);
+      transform: translateY(-3px);
+    }
+
+    .proj-top {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      margin-bottom: 1rem;
+    }
+    .proj-icon {
+      width: 38px; height: 38px;
+      background: var(--accent-lt); border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+    }
+    .proj-badges { display: flex; gap: 0.4rem; align-items: flex-start; flex-wrap: wrap; justify-content: flex-end; }
+    .badge {
+      font-family: var(--mono); font-size: 0.63rem;
+      padding: 0.18rem 0.55rem; border-radius: 4px; white-space: nowrap;
+    }
+    .badge-feat  { background: var(--accent-lt); color: var(--accent); border: 1px solid rgba(124,58,237,0.3); }
+    .badge-live  { background: rgba(16,185,129,0.1); color: var(--green); border: 1px solid rgba(16,185,129,0.3); }
+    .badge-local { background: rgba(6,182,212,0.1); color: var(--cyan); border: 1px solid rgba(6,182,212,0.3); }
+
+    .proj-title {
+      font-family: var(--display);
+      font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem;
+    }
+    .proj-desc {
+      font-size: 0.845rem; color: var(--muted);
+      flex: 1; margin-bottom: 1.2rem; line-height: 1.68;
+    }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 0.38rem; margin-bottom: 1.1rem; }
+    .proj-tag {
+      font-family: var(--mono); font-size: 0.66rem;
+      background: var(--surface2); color: var(--muted);
+      padding: 0.18rem 0.52rem; border-radius: 4px;
+      border: 1px solid var(--border);
+    }
+    .proj-links { display: flex; gap: 0.5rem; margin-top: auto; }
+    .proj-btn {
+      font-size: 0.78rem; font-weight: 500;
+      padding: 0.4rem 0.9rem; border-radius: 6px;
+      text-decoration: none; transition: all 0.2s;
+    }
+    .proj-btn.primary { background: var(--accent); color: #fff; }
+    .proj-btn.primary:hover { background: #6d28d9; }
+    .proj-btn.outline { border: 1px solid var(--border); color: var(--muted); }
+    .proj-btn.outline:hover { color: var(--text); border-color: var(--muted); }
+
+    /* ─── EXPERIENCE ─── */
+    .exp-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      display: grid; grid-template-columns: 1fr auto; gap: 0.75rem; align-items: start;
+    }
+    .exp-role { font-size: 1.05rem; font-weight: 600; font-family: var(--display); margin-bottom: 0.2rem; }
+    .exp-company { font-size: 0.9rem; color: var(--cyan); margin-bottom: 0.85rem; }
+    .exp-date { font-family: var(--mono); font-size: 0.76rem; color: var(--muted); white-space: nowrap; }
+    .exp-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.72; }
+    .exp-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1rem; }
+
+    /* ─── EDUCATION & CERTIFICATIONS ─── */
+    .edu-certs-grid {
+      display: grid; grid-template-columns: 1.2fr 1fr; gap: 3.5rem;
+    }
+    .edu-section-title {
+      font-size: 0.75rem; color: var(--muted);
+      font-family: var(--mono); letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 0.75rem;
+    }
+    .edu-list { list-style: none; }
+    .edu-item {
+      padding: 1rem 0; border-bottom: 1px solid var(--border);
+    }
+    .edu-item:first-child { padding-top: 0; }
+    .edu-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .edu-degree { font-size: 0.925rem; font-weight: 600; margin-bottom: 0.18rem; }
+    .edu-inst { font-size: 0.83rem; color: var(--cyan); margin-bottom: 0.18rem; }
+    .edu-year { font-family: var(--mono); font-size: 0.73rem; color: var(--muted); }
+
+    .cert-list { list-style: none; }
+    .cert-item {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      padding: 0.72rem 0; border-bottom: 1px solid var(--border);
+      font-size: 0.875rem;
+    }
+    .cert-item:first-child { padding-top: 0; }
+    .cert-item:last-child { border-bottom: none; padding-bottom: 0; }
+    .cert-dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0; margin-top: 0.58rem;
+    }
+    .cert-name { color: var(--text); font-weight: 500; line-height: 1.4; }
+    .cert-src { font-size: 0.76rem; color: var(--muted); font-family: var(--mono); margin-top: 0.15rem; }
+
+    /* ─── CONTACT ─── */
+    .contact-grid {
+      display: grid; grid-template-columns: 1.1fr 1fr; gap: 4rem; align-items: start;
+    }
+    .contact-text p { color: var(--muted); line-height: 1.8; margin-bottom: 2rem; }
+    .contact-links { display: flex; flex-direction: column; }
+    .contact-link {
+      display: flex; align-items: center; gap: 0.85rem;
+      color: var(--muted); text-decoration: none;
+      padding: 0.75rem 0; border-bottom: 1px solid var(--border);
+      transition: color 0.2s;
+    }
+    .contact-link:last-child { border-bottom: none; }
+    .contact-link:hover { color: var(--text); }
+    .cl-icon { font-size: 1.05rem; flex-shrink: 0; }
+    .cl-label { font-size: 0.73rem; color: var(--muted); font-family: var(--mono); display: block; line-height: 1.2; }
+    .cl-val { color: var(--text); font-weight: 500; font-size: 0.875rem; }
+
+    .stats-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+    }
+    .stat-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.78rem 0; border-bottom: 1px solid var(--border);
+    }
+    .stat-row:first-child { padding-top: 0; }
+    .stat-row:last-child { border-bottom: none; padding-bottom: 0; }
+    .stat-label { font-size: 0.845rem; color: var(--muted); }
+    .stat-val { font-family: var(--mono); font-size: 1rem; font-weight: 600; color: var(--accent); }
+    .stat-val.cyan { color: var(--cyan); font-size: 0.82rem; }
+    .stat-val.green { color: var(--green); font-size: 0.82rem; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      text-align: center; padding: 2.5rem;
+      font-family: var(--mono); font-size: 0.76rem;
+      color: var(--muted); border-top: 1px solid var(--border);
+    }
+    footer .accent { color: var(--accent); }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 860px) {
+      .projects-featured { grid-template-columns: 1fr; }
+      .projects-rest { grid-template-columns: 1fr 1fr; }
+      .edu-certs-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 640px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { gap: 1.1rem; }
+      .nav-links a { font-size: 0.78rem; }
+      #hero { padding-left: 1.25rem; padding-right: 1.25rem; }
+      .section-wrap { padding: 4rem 1.25rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.25rem; }
+      .projects-rest { grid-template-columns: 1fr; }
+      .exp-card { grid-template-columns: 1fr; }
+      h2 { font-size: 1.6rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ NAV ═══ -->
+<nav>
+  <a href="#hero" class="nav-logo">HimanshuBisht.dev</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-eyebrow">Full-Stack &amp; AI Developer</div>
+  <h1 class="hero-name">Himanshu Bisht<span class="cursor"></span></h1>
+  <div class="hero-role">Django &nbsp;·&nbsp; LangChain &nbsp;·&nbsp; RAG &nbsp;·&nbsp; REST APIs &nbsp;·&nbsp; AI Integration &nbsp;·&nbsp; Full Stack</div>
+  <p class="hero-sub">
+    I build <strong>production-grade web applications</strong> and
+    <strong>AI-powered systems</strong> — from full-stack Django backends to
+    multi-agent RAG pipelines with LangChain &amp; LangGraph.
+  </p>
+  <div class="btn-row">
+    <a href="#projects" class="btn btn-primary">View My Work</a>
+    <a href="https://github.com/hbishtn" target="_blank" class="btn btn-ghost">GitHub</a>
+    <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<div class="section-wrap" id="about">
+  <div class="section-label">// About</div>
+  <h2>Who I am</h2>
+  <div class="divider"></div>
+  <div class="about-grid">
+    <div class="about-text">
+      <p>
+        I'm a <strong>Full-Stack Django Developer</strong> with a growing specialization
+        in <strong>AI-integrated backend systems</strong>. I love building things end-to-end —
+        from clean REST APIs and database schemas to RAG pipelines that make applications
+        genuinely intelligent.
+      </p>
+      <p>
+        My core strengths are <strong>Python, Django, and JavaScript</strong>. Over time I've
+        expanded into the <strong>AI/LLM ecosystem</strong> — building multi-agent systems with
+        LangChain &amp; LangGraph, working with vector databases like ChromaDB, and orchestrating
+        async workflows with Celery &amp; Redis.
+      </p>
+      <p>
+        I'm currently pursuing a B.Tech in Computer Science and actively looking for
+        <strong>backend or full-stack roles</strong> where I can contribute to real,
+        impactful products.
+      </p>
+    </div>
+    <ul class="info-list">
+      <li><span class="info-key">Name</span><span class="info-val">Himanshu Bisht</span></li>
+      <li><span class="info-key">Location</span><span class="info-val">Almora, Uttarakhand</span></li>
+      <li><span class="info-key">Email</span><span class="info-val"><a href="mailto:hbishtn@gmail.com">hbishtn@gmail.com</a></span></li>
+      <li><span class="info-key">GitHub</span><span class="info-val"><a href="https://github.com/hbishtn" target="_blank">github.com/hbishtn</a></span></li>
+      <li><span class="info-key">LinkedIn</span><span class="info-val"><a href="https://linkedin.com/in/hbishtn" target="_blank">linkedin.com/in/hbishtn</a></span></li>
+      <li><span class="info-key">Status</span><span class="info-val open">Open to Opportunities</span></li>
+    </ul>
+  </div>
+</div>
+
+<!-- ═══ SKILLS ═══ -->
+<div class="section-wrap" id="skills">
+  <div class="section-label">// Skills</div>
+  <h2>What I work with</h2>
+  <div class="divider"></div>
+  <div class="skills-grid">
+
+    <div class="skill-card">
+      <div class="skill-card-head">
+        <div class="skill-icon">💬</div>
+        <h3>Languages</h3>
+      </div>
+      <div class="tags">
+        <span class="tag strong">Python</span>
+        <span class="tag strong">JavaScript</span>
+        <span class="tag strong">HTML5</span>
+        <span class="tag strong">CSS3</span>
+        <span class="tag">SQL</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-head">
+        <div class="skill-icon">🔧</div>
+        <h3>Backend &amp; APIs</h3>
+      </div>
+      <div class="tags">
+        <span class="tag strong">Django</span>
+        <span class="tag strong">Django REST Framework</span>
+        <span class="tag">FastAPI</span>
+        <span class="tag">REST API Design</span>
+        <span class="tag">Database Design</span>
+        <span class="tag">Django ORM</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-head">
+        <div class="skill-icon">🎨</div>
+        <h3>Frontend</h3>
+      </div>
+      <div class="tags">
+        <span class="tag strong">TailwindCSS</span>
+        <span class="tag">Responsive Design</span>
+        <span class="tag">DOM APIs</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-head">
+        <div class="skill-icon">🤖</div>
+        <h3>AI / LLM Stack</h3>
+      </div>
+      <div class="tags">
+        <span class="tag strong">LangChain</span>
+        <span class="tag strong">LangGraph</span>
+        <span class="tag strong">RAG</span>
+        <span class="tag">ChromaDB</span>
+        <span class="tag">Vector Databases</span>
+        <span class="tag">Embedding Systems</span>
+        <span class="tag">PyTorch</span>
+        <span class="tag">Transformers</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-head">
+        <div class="skill-icon">🗄️</div>
+        <h3>Databases &amp; Data</h3>
+      </div>
+      <div class="tags">
+        <span class="tag strong">PostgreSQL</span>
+        <span class="tag">SQLite3</span>
+        <span class="tag">Redis</span>
+        <span class="tag">Celery</span>
+        <span class="tag">NumPy</span>
+        <span class="tag">Pandas</span>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-card-head">
+        <div class="skill-icon">🛠️</div>
+        <h3>DevOps &amp; Tools</h3>
+      </div>
+      <div class="tags">
+        <span class="tag strong">Docker</span>
+        <span class="tag strong">Git</span>
+        <span class="tag">GitHub</span>
+        <span class="tag">VS Code</span>
+        <span class="tag">GitHub Copilot</span>
+        <span class="tag">Claude AI</span>
+        <span class="tag">Replit</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ PROJECTS ═══ -->
+<div class="section-wrap" id="projects">
+  <div class="section-label">// Projects</div>
+  <h2>Things I've built</h2>
+  <div class="divider"></div>
+
+  <div class="sub-label accent">⭐ Featured Projects</div>
+  <div class="projects-featured">
+
+    <!-- FEATURED 1: Online AI Agent -->
+    <div class="project-card featured">
+      <div class="proj-top">
+        <div class="proj-icon">🤖</div>
+        <div class="proj-badges">
+          <span class="badge badge-live">Live</span>
+          <span class="badge badge-feat">Featured</span>
+          <span class="badge badge-live">Cloud / API</span>
+        </div>
+      </div>
+      <div class="proj-title">Multi-Agent AI System (Online)</div>
+      <p class="proj-desc">
+        Cloud-hosted multi-agent AI platform built with LangChain &amp; LangGraph for
+        agent orchestration. Implements a full RAG pipeline backed by ChromaDB for
+        vector storage and embedding-based retrieval. Celery &amp; Redis handle async
+        task queuing; Django serves as the web backend with PostgreSQL for persistence.
+        Fully containerized with Docker. Includes a PyGUI desktop interface and
+        Playwright-powered browser automation for real-time web interaction.
+      </p>
+      <div class="proj-tags">
+        <span class="proj-tag">LangChain</span>
+        <span class="proj-tag">LangGraph</span>
+        <span class="proj-tag">RAG</span>
+        <span class="proj-tag">ChromaDB</span>
+        <span class="proj-tag">Celery</span>
+        <span class="proj-tag">Redis</span>
+        <span class="proj-tag">Docker</span>
+        <span class="proj-tag">Django</span>
+        <span class="proj-tag">PostgreSQL</span>
+        <span class="proj-tag">Python</span>
+        <span class="proj-tag">Playwright</span>
+        <span class="proj-tag">PyAutoGUI</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://ai-agent-qvvs.onrender.com" target="_blank" class="proj-btn primary">Live Demo ↗</a>
+        <a href="https://github.com/hbishtn" target="_blank" class="proj-btn outline">GitHub ↗</a>
+      </div>
+    </div>
+
+    <!-- FEATURED 2: Local AI Agent -->
+    <div class="project-card featured">
+      <div class="proj-top">
+        <div class="proj-icon">🧠</div>
+        <div class="proj-badges">
+          <span class="badge badge-feat">Featured</span>
+          <span class="badge badge-local">Local / Offline</span>
+        </div>
+      </div>
+      <div class="proj-title">Local LLM Agent System (Offline)</div>
+      <p class="proj-desc">
+        Fully offline variant of the multi-agent system that runs an open-source
+        language model locally on CPU/GPU — no external API calls. Built with PyTorch
+        and Hugging Face Transformers for on-device model inference. Shares the same
+        LangChain &amp; LangGraph orchestration layer, RAG pipeline, and Celery/Redis
+        async infrastructure, demonstrating a self-contained AI agent that runs
+        entirely on local hardware without internet dependency.
+      </p>
+      <div class="proj-tags">
+        <span class="proj-tag">PyTorch</span>
+        <span class="proj-tag">Transformers</span>
+        <span class="proj-tag">Local LLM</span>
+        <span class="proj-tag">LangChain</span>
+        <span class="proj-tag">LangGraph</span>
+        <span class="proj-tag">RAG</span>
+        <span class="proj-tag">ChromaDB</span>
+        <span class="proj-tag">Celery</span>
+        <span class="proj-tag">Redis</span>
+        <span class="proj-tag">Django</span>
+        <span class="proj-tag">Python</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/hbishtn" target="_blank" class="proj-btn outline">GitHub ↗</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="sub-label" style="margin-top: 1.5rem;">Other Projects</div>
+  <div class="projects-rest">
+
+    <!-- E-Commerce -->
+    <div class="project-card">
+      <div class="proj-top">
+        <div class="proj-icon">🛒</div>
+        <div class="proj-badges">
+          <span class="badge badge-live">Live</span>
+        </div>
+      </div>
+      <div class="proj-title">Django E-Commerce Platform</div>
+      <p class="proj-desc">
+        Full-stack e-commerce app with product management, cart, orders,
+        and auth. REST API layer, Cloudinary image storage, deployed live on Render
+        with modular web/API architecture.
+      </p>
+      <div class="proj-tags">
+        <span class="proj-tag">Django</span>
+        <span class="proj-tag">PostgreSQL</span>
+        <span class="proj-tag">REST API</span>
+        <span class="proj-tag">Cloudinary</span>
+        <span class="proj-tag">Render</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://ai-ecommerce-fhwh.onrender.com" target="_blank" class="proj-btn primary">Live Demo ↗</a>
+        <a href="https://github.com/hbishtn" target="_blank" class="proj-btn outline">GitHub</a>
+      </div>
+    </div>
+
+    <!-- Resume Analyzer -->
+    <div class="project-card">
+      <div class="proj-top">
+        <div class="proj-icon">📄</div>
+        <span class="badge badge-live">Live</span>
+      </div>
+      <div class="proj-title">AI Resume Analyzer</div>
+      <p class="proj-desc">
+        Django web app that evaluates resumes with AI — extracts skills,
+        gives improvement suggestions, and scores job role fit. File
+        upload with structured feedback output.
+      </p>
+      <div class="proj-tags">
+        <span class="proj-tag">Django</span>
+        <span class="proj-tag">Python</span>
+        <span class="proj-tag">AI Analysis</span>
+        <span class="proj-tag">REST API</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://ai-ecommerce-fhwh.onrender.com" target="_blank" class="proj-btn primary">Live Demo ↗</a>
+        <a href="https://github.com/hbishtn" target="_blank" class="proj-btn outline">GitHub ↗</a>
+      </div>
+    </div>
+
+    <!-- Network Troubleshooter -->
+    <div class="project-card">
+      <div class="proj-top">
+        <div class="proj-icon">🌐</div>
+      </div>
+      <div class="proj-title">Network Troubleshooter</div>
+      <p class="proj-desc">
+        Python diagnostic tool to analyze connectivity, latency, and
+        system health. Features automated checks and AI-assisted
+        suggestions to resolve common network issues.
+      </p>
+      <div class="proj-tags">
+        <span class="proj-tag">Python</span>
+        <span class="proj-tag">AI Diagnostics</span>
+        <span class="proj-tag">Automation</span>
+      </div>
+      <div class="proj-links">
+        <a href="https://github.com/hbishtn" target="_blank" class="proj-btn outline">GitHub ↗</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ EXPERIENCE ═══ -->
+<div class="section-wrap" id="experience">
+  <div class="section-label">// Experience</div>
+  <h2>Where I've worked</h2>
+  <div class="divider"></div>
+  <div class="exp-card">
+    <div>
+      <div class="exp-role">Data Analytics Intern — Python</div>
+      <div class="exp-company">Unified Mentor Pvt. Ltd.</div>
+      <p class="exp-desc">
+        Worked on real-world datasets — performed data cleaning, exploratory data analysis,
+        and visualization using Python. Used Pandas &amp; NumPy to process and transform data,
+        extract insights, and produce structured analytical reports.
+      </p>
+      <div class="exp-tags">
+        <span class="tag">Python</span>
+        <span class="tag">Pandas</span>
+        <span class="tag">NumPy</span>
+        <span class="tag">EDA</span>
+        <span class="tag">Data Cleaning</span>
+        <span class="tag">Data Visualization</span>
+      </div>
+    </div>
+    <div class="exp-date">2024 &nbsp;·&nbsp; 1 month</div>
+  </div>
+</div>
+
+<!-- ═══ EDUCATION + CERTIFICATIONS ═══ -->
+<div class="section-wrap" id="education">
+  <div class="section-label">// Education &amp; Certifications</div>
+  <h2>Academic background</h2>
+  <div class="divider"></div>
+  <div class="edu-certs-grid">
+
+    <div>
+      <div class="edu-section-title">Education</div>
+      <ul class="edu-list">
+        <li class="edu-item">
+          <div class="edu-degree">B.Tech — Computer Science Engineering</div>
+          <div class="edu-inst">JB Institute of Technology, Dehradun</div>
+          <div class="edu-year">2023 – 2026</div>
+        </li>
+        <li class="edu-item">
+          <div class="edu-degree">Diploma — Computer Science Engineering</div>
+          <div class="edu-inst">Government Polytechnic, Sult, Almora</div>
+          <div class="edu-year">2020 – 2023</div>
+        </li>
+        <li class="edu-item">
+          <div class="edu-degree">12th Intermediate</div>
+          <div class="edu-inst">UK Board, Uttarakhand</div>
+          <div class="edu-year">2020</div>
+        </li>
+        <li class="edu-item">
+          <div class="edu-degree">10th High School</div>
+          <div class="edu-inst">UK Board, Uttarakhand</div>
+          <div class="edu-year">2018</div>
+        </li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="edu-section-title">Certifications</div>
+      <ul class="cert-list">
+        <li class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">Cyber Security with Python</div>
+            <div class="cert-src">Coursera</div>
+          </div>
+        </li>
+        <li class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">Python Programming</div>
+          </div>
+        </li>
+        <li class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">Java Programming</div>
+          </div>
+        </li>
+        <li class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">Microsoft Azure Fundamentals</div>
+            <div class="cert-src">Microsoft</div>
+          </div>
+        </li>
+        <li class="cert-item">
+          <div class="cert-dot"></div>
+          <div>
+            <div class="cert-name">MERN Stack Fundamentals</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ CONTACT ═══ -->
+<div class="section-wrap" id="contact">
+  <div class="section-label">// Contact</div>
+  <h2>Let's work together</h2>
+  <div class="divider"></div>
+  <div class="contact-grid">
+
+    <div>
+      <div class="contact-text">
+        <p>
+          I'm open to <strong>full-time roles</strong>, <strong>internships</strong>, and
+          <strong>freelance projects</strong> in backend, full-stack, or AI-integrated
+          web development. If you have something in mind, let's talk.
+        </p>
+      </div>
+      <div class="contact-links">
+        <a href="mailto:hbishtn@gmail.com" class="contact-link">
+          <span class="cl-icon">✉️</span>
+          <div>
+            <span class="cl-label">Email</span>
+            <span class="cl-val">hbishtn@gmail.com</span>
+          </div>
+        </a>
+        <a href="https://github.com/hbishtn" target="_blank" class="contact-link">
+          <span class="cl-icon">🐙</span>
+          <div>
+            <span class="cl-label">GitHub</span>
+            <span class="cl-val">github.com/hbishtn</span>
+          </div>
+        </a>
+        <a href="https://linkedin.com/in/hbishtn" target="_blank" class="contact-link">
+          <span class="cl-icon">💼</span>
+          <div>
+            <span class="cl-label">LinkedIn</span>
+            <span class="cl-val">linkedin.com/in/hbishtn</span>
+          </div>
+        </a>
+        <a href="9368582352" target="_blank" class="contact-link">
+          <span class="cl-icon">📞</span>
+          <div>
+            <span class="cl-label">Contect</span>
+            <span class="cl-val">9368582352</span>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="stats-card">
+      <div class="section-label" style="margin-bottom: 0.85rem;">// Quick stats</div>
+      <div class="stat-row">
+        <span class="stat-label">Projects built</span>
+        <span class="stat-val">5+</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Technologies used</span>
+        <span class="stat-val">30+</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Current focus</span>
+        <span class="stat-val cyan">AI + Django</span>
+      </div>
+      <div class="stat-row">
+        <span class="stat-label">Availability</span>
+        <span class="stat-val green">Open</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <span class="accent">&lt;</span> Built by Himanshu Bisht <span class="accent">/&gt;</span> &nbsp;·&nbsp; 2025
+</footer>
+
+<script>
+  // Nav active highlight using IntersectionObserver
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const targets  = document.querySelectorAll('[id]');
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        navLinks.forEach(a => {
+          a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+        });
+      }
+    });
+  }, { rootMargin: '-35% 0px -55% 0px' });
+
+  targets.forEach(t => observer.observe(t));
+</script>
+</body>
+</html>
